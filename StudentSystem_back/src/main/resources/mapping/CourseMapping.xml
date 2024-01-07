@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.student.system.dao.mapper.CourseMapper">
+    <select id="getPage" resultType="CourseItemBO">
+        SELECT course_id AS 'id', course_name AS 'name', teacher_name AS 'teacherName',
+        department_name AS 'departmentName', course_time AS 'time'
+        FROM t_course
+        JOIN t_teacher on course_teacher_id = teacher_id
+        JOIN t_department on teacher_department_id = department_id
+        <where>
+            <if test="departmentName != null and departmentName != ''">
+                AND department_name LIKE CONCAT('%',#{departmentName},'%')
+            </if>
+            <if test="teacherName != null and teacherName != ''">
+                AND teacher_name LIKE CONCAT('%',#{teacherName},'%')
+            </if>
+            <if test="name != null and name != ''">
+                AND course_name LIKE CONCAT('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="count" resultType="Integer">
+        SELECT COUNT(*)
+        FROM t_course
+        JOIN t_teacher on course_teacher_id = teacher_id
+        JOIN t_department on teacher_department_id = department_id
+        <where>
+            <if test="departmentName != null and departmentName != ''">
+                AND department_name LIKE CONCAT('%',#{departmentName},'%')
+            </if>
+            <if test="teacherName != null and teacherName != ''">
+                AND teacher_name LIKE CONCAT('%',#{teacherName},'%')
+            </if>
+            <if test="name != null and name != ''">
+                AND course_name LIKE CONCAT('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="getDepartmentIdById" resultType="Integer">
+        SELECT teacher_department_id
+        FROM t_course
+                 JOIN t_teacher on course_teacher_id = teacher_id
+        WHERE course_id = #{courseId}
+    </select>
+</mapper>
