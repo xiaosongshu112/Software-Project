@@ -1,5 +1,36 @@
 # Software-Project
-  这是一个使用java语言来编写的学生信息管理系统，前端使用Vue，后端使用Spring boot，大致项目需求如下
+  这是一个使用java语言来编写的学生信息管理系统，前端使用Vue，后端使用Spring boot，前后端分离。
 
-  首先通过系统进行认证，具有注册、登录按钮，扩展修改密码以及忘记密码。认证后有三种身份，学生、老师以及管理员，学生只能查看自己信息，具有学号、姓名、性别、出生日期、籍贯、政治面貌、班级和老师信息；老师身份则可以查看自己学生信息、查找学生信息、排序信息、修改自己学生信息；管理员身份能够录入学生信息、修改学生信息、查看学生信息、查找学生信息、删除学生信息以及排序学生信息，同时能够管理日志，进行回退操作。
-![4d07924ac0c7140e43bf3f01df59bfa](https://github.com/xiaosongshu112/Software-Project/assets/113812799/8f2f323c-9145-4bf2-9fc3-d55f5e94fdb4)
+### 前端Vue.js
+
+- ElementUI
+- axios
+
+### 后端SpringBoot
+
+- 持久层: Mybatis Plus
+
+### 数据库
+ 
+- MySQL 8.0.35
+
+使用命令克隆项目
+````bash
+git clone https://github.com/xiaosongshu112/Software-Project.git
+````
+`StudentSystem_back`是后端项目
+
+`StudentSystem_front`是前端项目
+
+`student_system.sql`是数据库配置
+
+后端导入项目在Maven中选择Eexisting Maven Projects，之后选择StudentStStem_back路径。
+项目右键打开运行方式选中Maven build，等待完成之后打开运行方式选中Spring Boot App。
+后端配置完成
+
+数据库则是将 student_system.sql 移进mysql数据库管理应用中运行脚本即启动完成
+
+前端可在StudentSystem_front路径的cmd中配置，输入cnpm install 等待依赖安装完成，
+之后输入npm run serve，当出现网址时即启动完成
+
+最后根据前端cmd的网址在浏览器中打开即项目启动完成
