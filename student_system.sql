@@ -22,30 +22,6 @@ CREATE TABLE `t_admin`  (
 INSERT INTO `t_admin` VALUES (1, 'admin', '123456');
 INSERT INTO `t_admin` VALUES (2, 'manager', 'password');
 
--- ---------------------------
--- Table structure for t_class
--- ---------------------------
-DROP TABLE IF EXISTS `t_class`;
-CREATE TABLE `t_class`  (
-  `class_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '班级Id',
-  `class_major_id` int(10) UNSIGNED NOT NULL COMMENT '专业Id',
-  `class_grade` int(10) UNSIGNED NOT NULL COMMENT '年级',
-  `class_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '班级名称',
-  PRIMARY KEY (`class_id`) USING BTREE,
-  INDEX `fk_major_id`(`class_major_id`) USING BTREE,
-  INDEX `idx_class_name`(`class_name`) USING BTREE,
-  CONSTRAINT `fk_major_id` FOREIGN KEY (`class_major_id`) REFERENCES `t_major` (`major_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- --------------------------
--- Records of t_class
--- --------------------------
-INSERT INTO `t_class` VALUES (1, 1, 2017, '计科1班');
-INSERT INTO `t_class` VALUES (2, 1, 2018, '计科1班');
-INSERT INTO `t_class` VALUES (3, 4, 2019, '数学1班');
-INSERT INTO `t_class` VALUES (4, 5, 2020, '测试班级1');
-INSERT INTO `t_class` VALUES (5, 5, 2020, '测试班级2');
-
 -- ----------------------------
 -- Table structure for t_course
 -- ----------------------------
@@ -119,16 +95,16 @@ INSERT INTO `t_major` VALUES (5, 3, '理论物理');
 DROP TABLE IF EXISTS `t_student`;
 CREATE TABLE `t_student`  (
   `student_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '学生Id',
-  `student_class_id` int(10) UNSIGNED NOT NULL COMMENT '班级Id',
+  `student_major_id` int(10) UNSIGNED NOT NULL COMMENT '专业Id',
   `student_number` char(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '学号',
   `student_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '姓名',
   `student_password` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '密码',
   `student_sex` tinyint(1) UNSIGNED NOT NULL COMMENT '性别',
   PRIMARY KEY (`student_id`) USING BTREE,
-  INDEX `fk_student_class_id`(`student_class_id`) USING BTREE,
+  INDEX `fk_student_major_id`(`student_major_id`) USING BTREE,
   UNIQUE INDEX `idx_student_number`(`student_number`) USING BTREE,
   INDEX `idx_student_name`(`student_name`) USING BTREE,
-  CONSTRAINT `fk_student_class_id` FOREIGN KEY (`student_class_id`) REFERENCES `t_class` (`class_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `fk_student_major_id` FOREIGN KEY (`student_major_id`) REFERENCES `t_major` (`major_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -136,9 +112,9 @@ CREATE TABLE `t_student`  (
 -- ----------------------------
 INSERT INTO `t_student` VALUES (1, 1, '202312310001', '李雨轩', '123456', 1);
 INSERT INTO `t_student` VALUES (2, 1, '202312310002', '宋健', '123456', 1);
-INSERT INTO `t_student` VALUES (3, 1, '202312310003', '李同学1', '123456', 0);
-INSERT INTO `t_student` VALUES (4, 1, '202312310004', '李同学2', '123456', 0);
-INSERT INTO `t_student` VALUES (5, 1, '202312310005', '李同学3', '123456', 0);
+INSERT INTO `t_student` VALUES (3, 2, '202312310003', '李同学1', '123456', 0);
+INSERT INTO `t_student` VALUES (4, 3, '202312310004', '李同学2', '123456', 0);
+INSERT INTO `t_student` VALUES (5, 4, '202312310005', '李同学3', '123456', 0);
 
 -- ----------------------------
 -- Table structure for t_student_course
