@@ -4,7 +4,7 @@
 <mapper namespace="com.student.system.dao.mapper.StudentMapper">
     <select id="getPage" resultType="StudentItemVO">
         SELECT student_id AS 'id', student_number AS 'number', student_name AS 'name',
-        major_name AS 'majorName', student_sex AS 'sex',
+        major_name AS 'majorName', student_sex AS 'sex'
         FROM t_student
         JOIN t_major on student_major_id = major_id
         <where>
